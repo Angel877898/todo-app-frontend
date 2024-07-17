@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, onUpdateTask, onDeleteTask }) => {
   return (
     <div>
       {tasks.map((task) => (
@@ -10,7 +10,10 @@ const TaskList = ({ tasks }) => {
           <p>{task.startDate}</p>
           <p>{task.endDate}</p>
           <p>{task.email}</p>
-         
+          <button onClick={() => onUpdateTask(task.id, { ...task, completed: !task.completed })}>
+            {task.completed ? 'Mark as Incomplete' : 'Mark as Completed'}
+          </button>
+          <button onClick={() => onDeleteTask(task.id)}>Delete</button>
         </div>
       ))}
     </div>
@@ -28,7 +31,8 @@ TaskList.propTypes = {
       completed: PropTypes.bool.isRequired,
     })
   ).isRequired,
-
+  onUpdateTask: PropTypes.func.isRequired,
+  onDeleteTask: PropTypes.func.isRequired,
 }
 
 export default TaskList

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import TaskList from '../components/TaskList'
-import { getTasks } from '../api/tasks'
+import { getTasks, updateTask, deleteTask } from '../api/tasks'
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,10 +14,20 @@ const Home = () => {
     setTasks(tasks.data);
   };
 
+  const handleUpdateTask = async (id, updatedTask) => {
+    await updateTask(id, updatedTask);
+    fetchTasks();
+  };
+
+  const handleDeleteTask = async (id) => {
+    await deleteTask(id);
+    fetchTasks();
+  };
+
   return (
     <div>
       <h1>Todo List</h1>
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask} />
     </div>
   );
 };
