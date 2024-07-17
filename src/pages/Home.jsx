@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import TaskList from '../components/TaskList'
-import { getTasks, updateTask, deleteTask } from '../api/tasks'
+import { getTasks, updateTask, deleteTask, createTask } from '../api/tasks'
+import TaskForm from '../components/TaskForm'
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -24,9 +25,17 @@ const Home = () => {
     fetchTasks();
   };
 
+  const handleAddTask = async (task) => {
+    console.log(task);
+    await createTask(task);
+    const tasks = await getTasks();
+    setTasks(tasks.data);
+  };
+
   return (
     <div>
       <h1>Todo List</h1>
+      <TaskForm onAddTask={handleAddTask} />
       <TaskList tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask} />
     </div>
   );
