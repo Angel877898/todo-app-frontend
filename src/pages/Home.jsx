@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import TaskList from '../components/TaskList'
 import { getTasks, updateTask, deleteTask, createTask } from '../api/tasks'
 import TaskForm from '../components/TaskForm'
-import { Container, Typography, Grid, Paper } from '@mui/material'
+import { Container, Typography, Grid, Paper, Box } from '@mui/material'
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -40,6 +40,7 @@ const Home = () => {
 
   return (
     <Container>
+      
       <Typography variant="h4" gutterBottom>
         TODO List
       </Typography>
@@ -48,8 +49,17 @@ const Home = () => {
           <TaskForm onAddTask={handleAddTask} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper elevation={3}>
-            <TaskList tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask} />
+          <Paper elevation={3} style={{ height: '465px', overflow: 'hidden' }}>
+            <Box
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                overflowY: 'auto',
+              }}
+            >
+              <TaskList tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask} />
+            </Box>
           </Paper>
         </Grid>
       </Grid>

@@ -5,20 +5,21 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment'
 
 const TaskList = ({ tasks, onUpdateTask, onDeleteTask }) => {
+  const sortedTasks = tasks.slice().sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
   return (
     <List>
-      {tasks.map((task, index) => (
+      {sortedTasks.map((task, index) => (
         <React.Fragment key={task.id}>
           <ListItem>
             <Checkbox
               edge="start"
-              checked={task.completed || task.endDate}
+              checked={task.completed || task.endDate ? true : false}
               onClick={() => onUpdateTask(task.id, { ...task, completed: !task.completed })}
               />
             <ListItemText
               primary={
                 <span style={{ height:'auto', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  {task.name}
+                  <b>{task.name}</b>
                 </span>
               }
               secondary={
