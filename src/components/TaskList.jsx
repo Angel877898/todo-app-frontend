@@ -11,7 +11,7 @@ const TaskList = ({ tasks, onUpdateTask, onDeleteTask }) => {
           <ListItem>
             <Checkbox
               edge="start"
-              checked={task.completed}
+              checked={task.completed || task.endDate}
               onClick={() => onUpdateTask(task.id, { ...task, completed: !task.completed })}
             />
             <ListItemText

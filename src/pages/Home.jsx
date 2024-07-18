@@ -17,6 +17,11 @@ const Home = () => {
   };
 
   const handleUpdateTask = async (id, updatedTask) => {
+    if (updatedTask.completed) {
+      updatedTask.endDate = new Date().toISOString(); 
+    } else {
+      updatedTask.endDate = ''; 
+    }
     await updateTask(id, updatedTask);
     fetchTasks();
   };
