@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Checkbox, Typography, Divider } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment'
 
 const TaskList = ({ tasks, onUpdateTask, onDeleteTask }) => {
-  const sortedTasks = tasks.slice().sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+  const sortedTasks = useMemo(() =>
+    tasks.slice().sort((a, b) => new Date(b.startDate) - new Date(a.startDate)),
+    [tasks]
+  );
   return (
     <List>
       {sortedTasks.map((task, index) => (

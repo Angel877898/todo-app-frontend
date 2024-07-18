@@ -2,6 +2,8 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Button, Box, Typography } from '@mui/material';
 
+const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
 const TaskForm = ({ onAddTask }) => {
   const [task, setTask] = useState({
     name: '',
@@ -19,7 +21,7 @@ const TaskForm = ({ onAddTask }) => {
     setTask({ ...task, [name]: value });
 
     if (name === 'email') {
-      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      const emailPattern = EMAIL_REGEX;
       if (!emailPattern.test(value)) {
         setEmailError('Invalid email');
       } else {
