@@ -51,7 +51,7 @@ const TaskForm = ({ onAddTask }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ mt: -2 }}>
       <TextField
         margin="normal"
         required
