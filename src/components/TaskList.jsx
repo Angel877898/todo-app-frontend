@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Checkbox, Typography, Divider } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,46 +8,48 @@ const TaskList = ({ tasks, onUpdateTask, onDeleteTask }) => {
   return (
     <List>
       {tasks.map((task, index) => (
-        <>
+        <React.Fragment key={task.id}>
           <ListItem>
             <Checkbox
               edge="start"
               checked={task.completed || task.endDate}
               onClick={() => onUpdateTask(task.id, { ...task, completed: !task.completed })}
-            />
+              />
             <ListItemText
               primary={
-                <div style={{ height:'auto', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <span style={{ height:'auto', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {task.name}
-                </div>
+                </span>
               }
               secondary={
                 <>
-                  <Typography component="div" variant="body2" color="textPrimary">
-                    <div style={{ height:'auto', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <Typography component="b" variant="body2" color="textPrimary">
+                    <span style={{ height:'auto', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {task.description}
-                    </div>
+                    </span>
+                    <br />
                   </Typography>
                   Start Date: {moment(task.startDate).format('DD/MM/YYYY')}
                   <br />
                   End Date: {task.endDate ? moment(task.endDate).format('DD/MM/YYYY') : 'Pending'}
                   <br />
-                  <div style={{ height:'auto', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <span style={{ height:'auto', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     Responsible: {task.email}
-                  </div>
+                  </span>
                 </>
               }
-            />
+              />
             <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="delete" onClick={() => onDeleteTask(task.id)}>
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
-          {index !== tasks.length - 1 && <Divider variant="middle" />}
-        </>
+          {index !== tasks.length - 1 && <Divider  variant="middle" />}
+        </React.Fragment>
       ))}
     </List>
+    
   )
 }
 
