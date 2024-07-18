@@ -32,7 +32,6 @@ const Home = () => {
   };
 
   const handleAddTask = async (task) => {
-    console.log(task);
     await createTask(task);
     const tasks = await getTasks();
     setTasks(tasks.data);
@@ -40,7 +39,6 @@ const Home = () => {
 
   return (
     <Container>
-      
       <Typography variant="h4" gutterBottom>
         TODO List
       </Typography>
